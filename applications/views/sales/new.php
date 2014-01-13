@@ -11,10 +11,10 @@
     <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -41,8 +41,8 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">商品一覧</a></li>
-            <li><a href="sales.html">売上一覧</a></li>
+            <li class="active"><a href="products_controller.php">商品一覧</a></li>
+            <li><a href="sales_controller.php">売上一覧</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -54,32 +54,35 @@
 
       <p>購入数を入力して、購入ボタンを押してください。</p>
 
-      <form class="form-horizontal"  role="form">
+      <form class="form-horizontal"  role="form" action="sales_controller.php" method="POST">
+        <input type="hidden" value="create" name="action"/>
+        <input type="hidden" value=<?php echo $model_data->getId();?> name="id"/>
+
         <fieldset>
           <div class="form-group">
             <label class="col-sm-2 control-label">商品名</label>
             <div class="col-sm-10">
-              <p class="form-control-static">ふとんクリーナー</p>
+              <p class="form-control-static"><?php echo $model_data->getName(); ?></p>
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label">価格</label>
             <div class="col-sm-10">
-              <p class="form-control-static">28,880円</p>
+              <p class="form-control-static"><?php echo $model_data->getPrice(); ?>円</p>
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label">購入数</label>
             <div class="col-sm-1">
-              <input type="text" value="1" class="form-control" />
+              <input type="text" value="1" name="number" class="form-control" />
             </div>
           </div>
         </fieldset>
 
         <div class="well">
-          <a href="index.html" class="btn btn-default">戻る</a>
+          <a href="products_controller.php" class="btn btn-default">戻る</a>
           &nbsp;
           <button type="submit" class="btn btn-primary">購入する</button>
         </div>

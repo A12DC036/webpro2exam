@@ -1,4 +1,5 @@
 <?php
+require_once('DbUtil.php');
 
 class Product {
 
@@ -13,20 +14,11 @@ class Product {
     }
 
     public static function all() {
-// DB saccess (SELECT)
-        try {
-          $pdo = new PDO('mysql:dbname=webpro2exam;host=localhost', 'root', 'root');
-        } catch (PDOException $e) {
-          exit('データベースに接続できませんでした。' . $e->getMessage());
-        }
 
-        $stmt = $pdo->query('SET NAMES utf8');
-        if (!$stmt) {
-          $info = $pdo->errorInfo();
-          exit($info[2]);
-        }
+        $db = new DataBase();
+        $pdo = $db->getPdo();
 
-        $stmt = $pdo->query('SELECT name FROM Products');
+        $stmt = $pdo->query('SELECT * FROM Products');
         if (!$stmt) {
           $info = $pdo->errorInfo();
           exit($info[2]);
@@ -36,22 +28,51 @@ class Product {
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $params['id'] = $data['id'];
             $params['name'] = $data['name'];
-            $params['pricae'] = $data['price'];
+            $params['price'] = $data['price'];
             $product_temp = new Product($params);
-//          array_push($rtn_data,$product_temp);
-            array_push($rtn_data,$data['name']);
+            array_push($rtn_data,$product_temp);
         }
-        $pdo = null;
+        $db = null;
 
         return $rtn_data;
+    }
+
+    public static function load($id) {
+
+        $db = new DataBase();
+        $pdo = $db->getPdo();
+
+        $stmt = $pdo->query('SELECT * FROM Products where id = '.$id);
+        if (!$stmt) {
+          $info = $pdo->errorInfo();
+          exit($info[2]);
+        }
+
+        $rtn_product = null;
+        if ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $params['id'] = $data['id'];
+            $params['name'] = $data['name'];
+            $params['price'] = $data['price'];
+            $rtn_product = new Product($params);
+        }
+        $db = null;
+
+        return $rtn_product;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
     }
 
     public function getId() {
         return $this->id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+    public function getName() {
+        return $this->name;
+    }
+     public function getPrice() {
+        return $this->price;
     }
 
 }

@@ -10,10 +10,10 @@
     <title>Starter Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,8 +40,8 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="index.html">商品一覧</a></li>
-            <li class="active"><a href="sales.html">売上一覧</a></li>
+            <li><a href="products_controller.php">商品一覧</a></li>
+            <li class="active"><a href="sales_controller.php">売上一覧</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -63,30 +63,14 @@
           </tr>
         </thead>
         <tbody>
+          <?php  foreach ($model_data as $sale) { ?>
           <tr>
-            <td>2013/09/08 16:53</td>
-            <td>ロボット掃除機</td>
-            <td>1</td>
-            <td>51,500円</td>
+            <td><? echo $sale->getSalesAt();?></td>
+            <td><? echo $sale->getName();?></td>
+            <td><? echo $sale->getQuantity();?></td>
+            <td><? echo $sale->getQuantity()*$sale->getPrice();?>円</td>
           </tr>
-          <tr>
-            <td>2013/06/23 13:39</td>
-            <td>ダイソンコードレスクリーナー</td>
-            <td>1</td>
-            <td>47,610円</td>
-          </tr>
-          <tr>
-            <td>2013/04/07 18:11</td>
-            <td>全自動洗濯機</td>
-            <td>1</td>
-            <td>55,000円</td>
-          </tr>
-          <tr>
-            <td>2013/01/18 10:29</td>
-            <td>毛玉取り器</td>
-            <td>2</td>
-            <td>4,960円</td>
-          </tr>
+          <?php } ?>
         </tbody>
       </table>
 

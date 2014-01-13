@@ -1,4 +1,6 @@
-
+<?php
+require_once("model/product.php");
+?>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -41,8 +43,8 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">商品一覧</a></li>
-            <li><a href="sales.html">売上一覧</a></li>
+            <li class="active"><a href="products_controller.php">商品一覧</a></li>
+            <li><a href="sales_controller.php">売上一覧</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -57,8 +59,8 @@
       <p class="lead">
         <ul class="products">
           <?php
-            foreach ($model_data as $name) {
-              echo "<li><a href='sales_controller.php'>${name}</a></li>";
+            foreach ($model_data as $product) {
+              echo "<li><a href='sales_controller.php?action=new&id=".$product->getId()."'>".$product->getName()."</a></li>";
             }
           ?>
         </ul>
