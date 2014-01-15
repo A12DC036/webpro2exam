@@ -1,5 +1,6 @@
 <?php
 require_once('DbUtil.php');
+require_once('utils.php');
 
 class Sale {
 
