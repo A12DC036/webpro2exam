@@ -52,7 +52,7 @@ class Sale {
         $db = new DataBase();
         $pdo = $db->getPdo();
 
-        $sql = "INSERT INTO Sales (product_id, quantity, sales_at) VALUES (".$id.",".$number.",now())";
+        $sql = "INSERT INTO Sales (product_id, quantity, sales_at) VALUES (".escape_sql($id).",".escape_sql($number).",now())";
         $stmt = $pdo->query($sql);
         if (!$stmt) {
           $info = $pdo->errorInfo();

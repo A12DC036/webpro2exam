@@ -42,7 +42,7 @@ class Product {
         $db = new DataBase();
         $pdo = $db->getPdo();
 
-        $stmt = $pdo->query('SELECT * FROM Products where id = '.$id);
+        $stmt = $pdo->query('SELECT * FROM Products where id = '.escape_sql($id);
         if (!$stmt) {
           $info = $pdo->errorInfo();
           exit($info[2]);
