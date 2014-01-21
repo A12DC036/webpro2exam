@@ -1,6 +1,6 @@
 <?php
 require_once('DbUtil.php');
-require_once('util.php');
+require_once('utils.php');
 
 class Product {
 
